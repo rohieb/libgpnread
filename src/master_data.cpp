@@ -1,5 +1,5 @@
 /**
- * @file master_data.cpp -- Implementation for reading Master Data
+ * @file master_data.cpp Implementation for reading Master Data
  * @date 2011-04-08
  * @author Roland Hieber <rohieb@rohieb.name>
  *
@@ -26,15 +26,20 @@
 
 #include "master_data.h"
 #include <string>
+#include <sstream>
 
 using namespace std;
 using namespace gpnread;
 
 /**
- * Parse a Master Data Basic record (type 00)
- * @param text Additional textx after the record type
- * FIXME: do this!
+ * Parser hook for Master Data records (record type @c 00)
  */
-void MasterData::parseBasic(string& text) {
-}
+void MasterData::parseBasic(string& rectype, string& text) {
+  istringstream iss(text.substr(8));
+  uint32_t bgColor, fgColor;
+  NameRecord nmr;
 
+  // first fill the basic data
+
+
+}

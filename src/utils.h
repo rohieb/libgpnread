@@ -1,6 +1,6 @@
 /**
- * @file gpnread.h initial header file for libgpnread
- * @date 2011-08-04
+ * @file utils Declaration of useful helper functions
+ * @date 2011-08-18
  * @author Roland Hieber <rohieb@rohieb.name>
  *
  * Copyright (c) 2011 Roland Hieber
@@ -24,25 +24,22 @@
  * IN THE SOFTWARE.
  */
 
-#include "master_data.h"
-#include <iostream>
+#ifndef HELPERS_H_
+#define HELPERS_H_
+
+#include <set>
+#include <string>
 #include <boost/shared_ptr.hpp>
 
 using namespace std;
 
 namespace gpnread {
-
-class GpnRead {
-public:
-  GpnRead(const char * filename);
-  virtual void open(const char * filename);
-
-private:
-  /** Input stream for file to open */
-  boost::shared_ptr<ifstream> in;
-
-  MasterData master_data;
-};
-
+/**
+ * Determine the unique characters in a string.
+ * @param s The string of flags to be converted
+ * @return A set of characters which are present in the given string
+ */
+boost::shared_ptr<set<char> > uniqueChars(string& s);
 } // namespace gpnread
 
+#endif /* HELPERS_H_ */

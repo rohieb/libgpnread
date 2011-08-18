@@ -1,5 +1,5 @@
 /**
- * @file main.cpp -- main definitions
+ * @file main.cpp main definitions
  * @author Roland Hieber <rohieb@rohieb.name>
  * @date 2011-08-04
  *
@@ -59,7 +59,7 @@ namespace {
   /** Type of a record type */
   typedef const string rectype_t;
   /** Type of a function for record types */
-  typedef boost::function<void (string&)> rectype_cb_t;
+  typedef boost::function<void (string&, string&)> rectype_cb_t;
   /** Type of the function map to map record types to functions */
   typedef std::map<rectype_t, rectype_cb_t, ltstr> rectype_cb_map_t;
 } // namespace
@@ -73,9 +73,10 @@ namespace {
 void GpnRead::open(const char * filename) {
   // Build the callback function map for record types
   // TODO: Add handlers for new record types here!
+
   /** The actual map for mapping record types fo functions */
   rectype_cb_map_t cbMap;
-  cbMap["00"] = boost::bind(&MasterData::parseBasic, _1);
+  cbMap["00"] = boost::bind(&MasterData::parseBasic, &master_data, _1, _2);
 
   // other initialization
   in->open(filename, ios_base::in);
@@ -90,7 +91,7 @@ void GpnRead::open(const char * filename) {
     cout << "Read rectype " << recType << ", content " << text << endl;
     // and call function
     if(cbMap.count(recType) == 1) {
-      cbMap[recType](text);
+      cbMap[recType](recType, text);
     } else {
       cerr << "Error: function for record type `" << recType <<
         "' not yet implemented!" << endl;

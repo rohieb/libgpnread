@@ -1,6 +1,6 @@
 /**
- * @file gpnread.h initial header file for libgpnread
- * @date 2011-08-04
+ * @file utils.cpp Definition of useful helper functions
+ * @date 2011-08-18
  * @author Roland Hieber <rohieb@rohieb.name>
  *
  * Copyright (c) 2011 Roland Hieber
@@ -24,25 +24,14 @@
  * IN THE SOFTWARE.
  */
 
-#include "master_data.h"
-#include <iostream>
-#include <boost/shared_ptr.hpp>
+#include "utils.h"
 
-using namespace std;
+using namespace gpnread;
 
-namespace gpnread {
-
-class GpnRead {
-public:
-  GpnRead(const char * filename);
-  virtual void open(const char * filename);
-
-private:
-  /** Input stream for file to open */
-  boost::shared_ptr<ifstream> in;
-
-  MasterData master_data;
-};
-
-} // namespace gpnread
-
+boost::shared_ptr<set<char> > uniqueChars(string& s) {
+  set<char> * charset = new set<char>();
+  for(string::iterator it = s.begin(); it != s.end(); it++) {
+    charset->insert(*it);
+  }
+  return boost::shared_ptr<set<char> >(charset);
+}

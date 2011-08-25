@@ -1,4 +1,4 @@
-OBJS := main.o master_data.o utils.o
+OBJS := gpnread.o master_data.o utils.o
 TARGET := libgpnread.so
 
 CXXFLAGS = -fPIC

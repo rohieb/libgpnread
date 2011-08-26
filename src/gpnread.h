@@ -28,8 +28,6 @@
 #include <iostream>
 #include <boost/shared_ptr.hpp>
 
-using namespace std;
-
 namespace gpnread {
 
 class GpnRead {
@@ -39,7 +37,7 @@ public:
 
 private:
   /** Input stream for file to open */
-  boost::shared_ptr<ifstream> in;
+  boost::shared_ptr<std::ifstream> in;
 
   MasterData master_data;
 };

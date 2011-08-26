@@ -31,15 +31,13 @@
 #include <string>
 #include <boost/shared_ptr.hpp>
 
-using namespace std;
-
 namespace gpnread {
 /**
  * Determine the unique characters in a string.
  * @param s The string of flags to be converted
  * @return A set of characters which are present in the given string
  */
-boost::shared_ptr<set<char> > uniqueChars(string& s);
+boost::shared_ptr<std::set<char> > uniqueChars(std::string& s);
 } // namespace gpnread
 
 #endif /* HELPERS_H_ */

@@ -27,6 +27,7 @@
 #include "utils.h"
 
 using namespace gpnread;
+using namespace std;
 
 boost::shared_ptr<set<char> > uniqueChars(string& s) {
   set<char> * charset = new set<char>();

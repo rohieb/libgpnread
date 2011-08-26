@@ -30,8 +30,6 @@
 #include <stdint.h>
 #include <boost/shared_ptr.hpp>
 
-using namespace std;
-
 namespace gpnread {
 
 /**
@@ -75,28 +73,28 @@ struct Room; /* we only need it here for the shared ptr */
  */
 struct NameRecord {
   /** Short name of the described item */
-  string shortName;
+  std::string shortName;
   /** Full name of the described item */
-  string fullName;
+  std::string fullName;
   /** Room associated with the item */
   boost::shared_ptr<Room> roomName;
   /** General text for the item */
-  string generalText;
+  std::string generalText;
   /**
    * Short description of the item
    * @todo needs to be pointer to description
    */
-  string descr;
+  std::string descr;
   /** not used, seems to be always empty */
-  string value;
+  std::string value;
   /** Foreground color */
   Color fgColor;
   /** Background color */
   Color bgColor;
   /** not used, seems to be always empty */
-  string key;
+  std::string key;
   /** not used, seems to be always empty */
-  string dataFields;
+  std::string dataFields;
   /**
    * Flags: A set of single characters with the following meaning if set:
    *  - @c A: No non-teaching periods (NTPs) (only for teachers)
@@ -126,12 +124,12 @@ struct NameRecord {
    *    half-day (for classes, teachers)
    *  - @c 2: Can be scheduled more than once a day (only for subjects)
    */
-  set<char> flags;
+  std::set<char> flags;
   /**
    * Statistical codes: set of single characters. Semantical meaning is
    * determined by the end user.
    */
-  set<char> statCodes;
+  std::set<char> statCodes;
 };
 
 /**
@@ -164,16 +162,16 @@ struct Subject : NameRecord {
 
 class MasterData {
 public:
-  void parseBasic(string& rectype, string& text);
+  void parseBasic(std::string& rectype, std::string& text);
 
   /** map from class short names to class records */
-  map<string, boost::shared_ptr<Class> > classes;
+  std::map<std::string, boost::shared_ptr<Class> > classes;
   /** map from teacher short names to teacher records */
-  map<string, boost::shared_ptr<Teacher> > teachers;
+  std::map<std::string, boost::shared_ptr<Teacher> > teachers;
   /** map from room short names to room records */
-  map<string, boost::shared_ptr<Room> > rooms;
+  std::map<std::string, boost::shared_ptr<Room> > rooms;
   /** map from subject short names to subject records */
-  map<string, boost::shared_ptr<Subject> > subjects;
+  std::map<std::string, boost::shared_ptr<Subject> > subjects;
 
 private:
   /** pointer to the last inserted class record */

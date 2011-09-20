@@ -160,6 +160,24 @@ struct Room : NameRecord {
 struct Subject : NameRecord {
 };
 
+/**
+ * Structure describing a description
+ * @todo
+ */
+struct Description : NameRecord {
+};
+
+/**
+ * Structure describing department
+ * @todo
+ */
+struct Department : NameRecord {
+};
+
+/**
+ * Class encapsulating the Master Data of a gp-Untis file: information about
+ * classes, teachers, rooms, subjects, etc.
+ */
 class MasterData {
 public:
   void parseBasic(std::string& rectype, std::string& text);

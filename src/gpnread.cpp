@@ -69,6 +69,7 @@ namespace {
  * @param filename Name of the file to read from. The file must be readable to
  *  the user. If empty, no file will be opened.
  * @throws std::ifstream::failure in case the file could not be opened
+ * @todo write about Parser Hooks
  */
 void GpnRead::open(const char * filename) {
   // Build the callback function map for record types

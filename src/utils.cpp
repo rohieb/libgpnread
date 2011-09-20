@@ -25,14 +25,54 @@
  */
 
 #include "utils.h"
+#include <sstream>
 
-using namespace gpnread;
 using namespace std;
 
-boost::shared_ptr<set<char> > uniqueChars(string& s) {
-  set<char> * charset = new set<char>();
+namespace gpnread {
+
+/*
+ * get set of chars occuring in string
+ */
+set<char> charset(string s) {
+  set<char> chars;
   for(string::iterator it = s.begin(); it != s.end(); it++) {
-    charset->insert(*it);
+    chars.insert(*it);
   }
-  return boost::shared_ptr<set<char> >(charset);
+  return chars;
 }
+
+/*
+ * split string at comma, but ignore commas between quotation marks
+ */
+bool getVarFields(vector<string>& container, string text) {
+  stringstream ss(text);
+  string field;
+  char c;
+  bool quotation = false;
+
+  container.clear();
+
+  // note: fields end at newline
+  while(ss.good() && ss.get(c) && c != '\n' && c != '\r') {
+    if(c == '"') {
+      quotation = !quotation;
+
+    } else if(c == ',') {
+      if(quotation) {
+        field.push_back(',');
+      } else {
+        container.push_back(field);
+        field.clear();
+      }
+
+    } else {
+      field.push_back(c);
+    }
+  }
+  container.push_back(field); // at EOL or error
+
+  return !quotation;
+}
+
+} // namespace gpnread

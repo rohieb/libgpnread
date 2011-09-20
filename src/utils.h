@@ -24,20 +24,41 @@
  * IN THE SOFTWARE.
  */
 
-#ifndef HELPERS_H_
-#define HELPERS_H_
+#ifndef UTILS_H_
+#define UTILS_H_
 
 #include <set>
+#include <vector>
 #include <string>
 #include <boost/shared_ptr.hpp>
 
 namespace gpnread {
+
 /**
- * Determine the unique characters in a string.
- * @param s The string of flags to be converted
- * @return A set of characters which are present in the given string
+ * Determine the unique characters occuring in a string.
+ * @param s The string
+ * @return The set of characters which are present in the given string
  */
-boost::shared_ptr<std::set<char> > uniqueChars(std::string& s);
+std::set<char> charset(std::string s);
+
+/**
+ * Get the variable fields from a text string. The fields have to be
+ * comma-separated. If a field should contain one or more literal commas, the
+ * contents of the field have to start and end in a quotation mark (@c ") which
+ * are omitted in the parsed field and not written to the output.
+ *
+ * @param container Vector to hold the contents of the fields. If the
+ *  conversion was successful, this vector contains the value of the @i n-th
+ *  field in its @i n-th element.
+ *
+ * @param text String of comma-separated fields to be parsed.
+ *
+ * return @c false if there was an uneven number of quotation marks in the
+ *  string, or @c true otherwise. In the first case, the container array may
+ *  contain unwanted results.
+ */
+bool getVarFields(std::vector<std::string>& container, std::string text);
+
 } // namespace gpnread
 
-#endif /* HELPERS_H_ */
+#endif /* UTILS_H_ */

@@ -27,7 +27,6 @@
 #include "master_data.h"
 #include <string>
 #include <sstream>
-
 using namespace std;
 using namespace gpnread;
 
@@ -35,11 +34,22 @@ using namespace gpnread;
  * Parser hook for Master Data records (record type @c 00)
  */
 void MasterData::parseBasic(string& rectype, string& text) {
-  istringstream iss(text.substr(8));
   uint32_t bgColor, fgColor;
-  NameRecord nmr;
+  NameRecord * nmr = new NameRecord;
 
   // first fill the basic data
+
+//  vector<string> varData;
+//  boost::algorithm::split(varData, text.substr(5), boost::algorithm::);
+
+  switch(text.at(0)) {
+    case 'K': nmr = new Class; break;
+    case 'L': nmr = new Teacher; break;
+    case 'R': nmr = new Room; break;
+    case 'F': nmr = new Subject; break;
+    case 'M': nmr = new Department; break;
+    case '=': nmr = new Description; break;
+  }
 
 
 }
